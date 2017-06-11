@@ -1,4 +1,10 @@
 function startApp() {
+
+    if (sessionStorage.getItem('authToken') !== null) {
+        let username = sessionStorage.getItem('username');
+        $('#loggedInUser').text("Welcome, " + username + "!");
+    }
+
     showHideMenuLinks();
     showHomeView();
     showView('viewHome');
@@ -8,7 +14,7 @@ function startApp() {
     $("#linkLogin").click(showLoginView);
     $("#linkRegister").click(showRegisterView);
     $("#linkLogout").click(logoutUser);
-
+    $("#loggedInUser").hide();
     // Bind the form submit buttons
     $("#buttonLoginUser").click(loginUser);
     $("#buttonRegisterUser").click(registerUser);
@@ -31,6 +37,7 @@ function startApp() {
             $("#linkLogin").hide();
             $("#linkRegister").hide();
             $("#linkLogout").show();
+            $("#loggedInUser").show();
         }
     }
 
@@ -79,6 +86,10 @@ function startApp() {
         sessionStorage.setItem('authToken', userAuth);
         let userId = userInfo._id;
         sessionStorage.setItem('userId', userId);
+        let username = userInfo.username;
+        sessionStorage.setItem('username', username);
+        $('#loggedInUser').text("Welcome, " + username + "!");
+
     }
 
     // user/register
