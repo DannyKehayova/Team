@@ -206,6 +206,7 @@
                     } else {
                         this.status = 403;
                         this.responseText = "You are not authorized";
+
                     }
                 }
             };
